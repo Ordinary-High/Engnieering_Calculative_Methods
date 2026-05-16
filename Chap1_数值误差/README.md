@@ -12,24 +12,24 @@
 ### 绝对误差与绝对误差限
 一句话，误差就是 $真实值-观测值$
 #### 绝对误差
-设 $x$ 是准确值 $x^*$ 的近似值，称 $e$ 是近似值x的绝对误差,简称误差。
+设 $x$ 是准确值 $x^\*$ 的近似值，称 $e$ 是近似值x的绝对误差,简称误差。
 $$e=x^*-x$$
 #### 绝对误差限
 称 $\epsilon$ 为绝对误差限，简称误差限。
-$$\left| \epsilon \right| = \left| x^* - x \right| \leq \epsilon$$
-则有 $x^* = x \pm \epsilon,\enspace x-\epsilon\leq x^* \leq x + \epsilon$
+$$\left| \epsilon \right| = \left| x^\* - x \right| \leq \epsilon$$
+则有 $x^\* = x \pm \epsilon,\enspace x-\epsilon\leq x^\* \leq x + \epsilon$
 
 ~~例：~~ 用毫米刻度的直尺测量一长度为 $x^*$ 的物体，测得其长度的近似值为 $x = 
-123mm$ ，由于直尺以毫米为刻度，所以其误差不超过$0.5mm$，即：$\epsilon = 0.5mm$ ~~（现在知道为什么基物实验里 $\Delta_仪$ 是最小刻度的一半了吧）~~
+123mm$ ，由于直尺以毫米为刻度，所以其误差不超过 $0.5mm$，即 $\epsilon = 0.5mm$ ~~（现在知道为什么基物实验里 $\Delta_仪$ 是最小刻度的一半了吧）~~
 
 ### 相对误差与相对误差限
 一句话，相对误差就是 $绝对误差\div真实值$
 #### 相对误差
-$$e_r=\dfrac{e}{x^*}=\dfrac{x^*-x}{x^*}$$
+$$e_r=\dfrac{e}{x^\*}=\dfrac{x^\*-x}{x^\*}$$
 通常由下式计算：
-$$\overline{e_r}=\dfrac{e}{x}=\dfrac{x^*-x}{x}$$
-~~废话，这个式子里不一样有$x^*$~~
+$$\overline{e_r}=\dfrac{e}{x}=\dfrac{x^\*-x}{x}$$
+~~废话，这个式子里不一样有 $x^\*$~~
 #### 相对误差限
-$$\left|e_r\right |\leq\epsilon_r$$
+$$\left| e_r\right |\leq\epsilon_r$$
 
 ---
