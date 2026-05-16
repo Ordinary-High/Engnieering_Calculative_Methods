@@ -17,7 +17,9 @@
 $$e=x^*-x$$
 #### 绝对误差限
 称 $\varepsilon$ 为绝对误差限，简称误差限。
+
 $$\left| \varepsilon \right| = \left| x^\* - x \right| \leq \varepsilon$$
+
 则有 $x^\* = x \pm \varepsilon,\enspace x-\varepsilon\leq x^\* \leq x + \varepsilon$
 
 ~~例：~~ 用毫米刻度的直尺测量一长度为 $x^*$ 的物体，测得其长度的近似值为 $x = 
@@ -26,11 +28,15 @@ $$\left| \varepsilon \right| = \left| x^\* - x \right| \leq \varepsilon$$
 ### 相对误差与相对误差限
 一句话，相对误差就是 $绝对误差\div真实值$
 #### 相对误差
+
 $$e_r=\dfrac{e}{x^\*}=\dfrac{x^\*-x}{x^\*}$$
 通常由下式计算：
+
 $$\overline{e_r}=\dfrac{e}{x}=\dfrac{x^\*-x}{x}$$
+
 ~~废话，这个式子里不一样有 $x^\*$~~
 #### 相对误差限
+
 $$\left| e_r\right |\leq\varepsilon_r$$
 
 ---
@@ -57,18 +63,24 @@ $$\left| e_r\right |\leq\varepsilon_r$$
 考虑函数的误差与变量误差的关系，令精确值 $y^\*=f\left(x_1^\*, x_2^\* \right)$，观测值 $y=f\left(x_1,x_2 \right)$。
 
 由泰勒公式
+
 $$f\left(x_1^\*, x_2^\*\right)\approx f\left(x_1, x_2 \right) + \dfrac{\partial f\left(x_1, x_2 \right)}{\partial x_1}\left(x^\*-x_1 \right)+\dfrac{\partial f\left(x_1, x_2 \right)}{\partial x_2}\left(x^\*-x_2 \right)$$
 
 则
+
 $$e\left(y \right)=y^\*-y\approx\dfrac{\partial f\left(x_1, x_2 \right)}{\partial x_1}e\left(x_1 \right)+\dfrac{\partial f\left(x_1, x_2 \right)}{\partial x_2}e\left(x_2 \right)$$
+
 $$e_r\left(y \right)\approx\dfrac{\partial f\left(x_1, x_2 \right)}{\partial x_1} \dfrac{x_1}{y} e_r\left(x_1 \right)+\dfrac{\partial f\left(x_1, x_2 \right)}{\partial x_2}\dfrac{x_2}{y}e_r\left(x_2 \right)$$
 
 #### 常用结论 ⭐️
 **注意：这里是 $\approx$ 而不是 $=$**
-$$e\left(x_1+x_2 \right)\approx e\left(x_1 \right) + e(x_2)\\
+
+$$\begin{aligned}
+e\left(x_1+x_2 \right)\approx e\left(x_1 \right) + e(x_2)\\
 e\left(x_1-x_2 \right) \approx e(x_1) - e(x_2)\\
 e(x_1x_2)\approx x_2e(x_1)+x_1e(x_2)\\
-e\left(\dfrac{x_1}{x_1} \right) \approx \dfrac{e(x_1)}{x_2}-\dfrac{x_1e(x_1)}{x_2^2},\enspace x_2 \neq 0$$
+e\left(\dfrac{x_1}{x_1} \right) \approx \dfrac{e(x_1)}{x_2}-\dfrac{x_1e(x_1)}{x_2^2},\enspace x_2 \neq 0
+\end{aligned}$$
 
 计算 $e_r(f(x_1,x_2))$ 使用公式 $e_r\left(y \right)\approx\dfrac{\partial f\left(x_1, x_2 \right)}{\partial x_1} \dfrac{x_1}{y} e_r\left(x_1 \right)+\dfrac{\partial f\left(x_1, x_2 \right)}{\partial x_2}\dfrac{x_2}{y}e_r\left(x_2 \right)$ 计算即可，这里不再详细列出。
 
@@ -105,7 +117,7 @@ $$f(x)=a_0x^n+a_1x^{n-1}+\dots+a_n$$
 令 $x=1.001, n=9999,a_n=1+n$
 
 秦九韶法：
-$$f(x)=\left\{\left\{\left\{(a_0x+a_1)x \dots \right\}x+a_{n-1} \right\}x \right\}+a_n$$
+$$f(x)=\left(\left(\left((a_0x+a_1)x \dots \right)x+a_{n-1} \right)x \right)+a_n$$
 
 观察：
 1. 计算时间差异
