@@ -50,6 +50,7 @@ double bisec(double l, double r, double (*func)(double))
 ### 牛顿迭代法
 迭代公式：
 $$x_{k + 1}=x_k-\dfrac{f(x)}{f^{'}(x)}$$
+
 几何意义：切线零点不断靠近函数零点。
 
 代码[非线性方程组的数值解法.cpp](../../Code/非线性方程组的数值解法.cpp)中的 `newton` 函数实现了一般形式上的牛顿迭代法。以 `x0` 为起点，开始迭代导数为 `ff` 的函数 `f` 的零点。
@@ -98,7 +99,7 @@ $$|x_{k+1}-x^\*|\leq|x_{k + 1} - x_k| = \dfrac{|x_k-x_{k-1}|}{2} = \dfrac{|a-b|}
 故 $\lim_{k\to+\infty}|x_{k+1}-x^\*|=0$
 
 #### 事前误差分析
-由$|x_{k+1}-x^\*|\leq \dfrac{|a-b|}{2^k}$ 得 $k \geq \log_2\left(\dfrac{|a-b|}{\varepsilon}\right)$，故 $k =  \left \lceil \dfrac{\ln|a-b|-\ln\varepsilon}{\ln2}\right \rceil$
+由 $|x_{k+1}-x^\*|\leq \dfrac{|a-b|}{2^k}$ 得 $k \geq \log_2\left(\dfrac{|a-b|}{\varepsilon}\right)$，故 $k =  \left \lceil \dfrac{\ln|a-b|-\ln\varepsilon}{\ln2}\right \rceil$
 
 ### 一般迭代法的收敛性判断
 不是所有的 $x=g(x)$ 形式都可以收敛，关键是找 $g(x)$ 需要满足的条件。
@@ -107,7 +108,7 @@ $$|x_{k+1}-x^\*|\leq|x_{k + 1} - x_k| = \dfrac{|x_k-x_{k-1}|}{2} = \dfrac{|a-b|}
 
 在一个区间 $\Delta$ 内，所有的 $|g(x) - g(y)| \leq L |x-y|,\enspace 0 < L < 1$。
 
-等价于：$g^{'}(x)$ 在 $\Delta$ 内连续，且 $|g^{'}(x)| \leq L < 1$。
+等价于： $g^{'}(x)$ 在 $\Delta$ 内连续，且 $|g^{'}(x)| \leq L < 1$。
 
 满足以上条件的 $g(x)$ 在 $\Delta$ 内迭代均收敛到 $x^\*$。
 
@@ -121,10 +122,19 @@ $$|x_{k+1}-x^\*|\leq|x_{k + 1} - x_k| = \dfrac{|x_k-x_{k-1}|}{2} = \dfrac{|a-b|}
 牛顿法迭代速度分析：
 
 在 $x^\*$ 处泰勒展开：
+
 $$f(x^\*)=0=f(x_k)+f^{'}(x)(x^\*-x_k)+\dfrac{1}{2}f^{''}(\xi)(x^\*-x_k)^2$$
+
 整理得
+
 $$x^\*=x_k-\dfrac{f(x_k)}{f^{'}(x_k)}-\dfrac{f^{''}(x_k)}{2f(x)}(x^\* - x_k)^2$$
+
 不难发现
+
 $$x^\*-x_{k+1}=-\dfrac{f^{''}(x_k)}{2f(x)}(x^\* - x_k)^2$$
+
 故
+
 $$\dfrac{e_{k+1}}{e_k}=\dfrac{f^{''}(x_k)}{2f(x)}\to\dfrac{f^{''}(x^\*)}{f^{'}(x^\*)}$$
+
+牛顿法为平方收敛
