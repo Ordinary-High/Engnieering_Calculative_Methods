@@ -117,7 +117,7 @@ $$f(x)=a_0x^n+a_1x^{n-1}+\dots+a_n$$
 令 $x=1.001, n=9999,a_n=1+n$
 
 秦九韶法：
-$$f(x)=\left(\left(\left((a_0x+a_1)x \dots \right)x+a_{n-1} \right)x \right)+a_n$$
+$$f(x)=\left\lbrace\left\lbrace\left\lbrace(a_0x+a_1)x \dots \right\rbrace x+a_{n-1} \right\rbrace x \right\rbrace+a_n$$
 
 观察：
 1. 计算时间差异
