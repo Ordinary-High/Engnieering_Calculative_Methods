@@ -41,7 +41,7 @@ $$||x||_1=|x_1|+|x_2|+\dots+|x_n|$$
 
 $$||x||_2=\sqrt{x_1^2+x_2^2+\dots+x_n^2}$$
 
-$$||x||_{\infty}=max\{|x_1|+|x_2|+\dots+|x_n|\}$$
+$$||x||_{\infty}=max\left\lbrace|x_1|+|x_2|+\dots+|x_n|\right\rbrace$$
 
 ### 矩阵的范数
 
