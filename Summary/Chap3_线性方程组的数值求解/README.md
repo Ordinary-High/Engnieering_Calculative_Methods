@@ -223,6 +223,32 @@ $$x^{(k+1)}_i=x^{(k)}_i-\dfrac{\omega}{a_{ii}}\left(\sum_{j=1}^{i-1}a_{ij}x_j^{(
 
 $$x^{(k+1)}_i=(1-\omega)x^{(k)}_i-\dfrac{\omega}{a_{ii}}\left(\sum_{j=1}^{i-1}a_{ij}x_j^{(k+1)}+\sum_{j=i+1}^{n}a_{ij}x_j^{(k)}\right)+\dfrac{\omega b_i}{a_{ii}}$$
 
+代码[非线性方程组的数值解法.cpp](../../Code/非线性方程组的数值解法.cpp)中的 `Gauss_Seidel` 函数实现了一般Gauss-Seidel迭代法。
+```cpp
+vector<double> Relaxation(double w)
+{
+    vector<vector<double>> x(2, init_point);
+    double e = 1.;
+    int cnt = 0;
+    while(e > EPS)
+    {
+        int k = cnt % 2, kk = (cnt + 1) % 2;
+        cnt ++;
+        for(int i = 0; i < N; i ++)
+        {
+            double d = b[i];
+            for(int j = 0; j < i; j ++) d -= a[i][j] * x[kk][j];
+            for(int j = i; j < N; j ++) d -= a[i][j] * x[k][j];
+            x[kk][i] = x[k][i] + w * d / a[i][i];
+        }
+        e = 0;
+        for(int i = 0; i < N; i ++) e += fabs(x[kk][i] - x[k][i]);
+    }
+    return x[cnt % 2];
+}
+```
+注：这里的展示略去了打印迭代的过程的代码，且方程组定义为全局变量，故此函数仅需要传入松弛因子 `w`，问了老师，一般松弛因子小于 $1$ 。
+
 ### 收敛性质
 迭代法的迭代通式可表示为
 
