@@ -20,7 +20,7 @@ $$E(X)=\int_{-\infty}^{+\infty}xf(x)\mathrm{d}x$$
 
 **方差**
 
-定义：$D(x)=E\left\lbrace\left[x-E(X)\right]^2\right\rbrace=E\left(X^2\right)-\left[E(x)\right]^2$
+定义： $D(x)=E\left\lbrace\left[x-E(X)\right]^2\right\rbrace=E\left(X^2\right)-\left[E(x)\right]^2$
 
 计算期望即可
 
