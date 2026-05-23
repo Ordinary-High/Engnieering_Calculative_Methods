@@ -88,7 +88,7 @@ $$p(X) = \dfrac{\lambda^xe^{-\lambda}}{x!}, x = 0,1,2,\dots$$
 其中 $\lambda > 0$ 
 
 #### $t$ 分布
-设 $X \sim N(0,1), Y\sim\chi^2(n)，且 $X,Y$ 独立，则称随机变量
+设 $X \sim N(0,1), Y\sim\chi^2(n)$ ，且 $X,Y$ 独立，则称随机变量
 
 $$t=\dfrac{X}{\sqrt{Y/n}}$$
 
