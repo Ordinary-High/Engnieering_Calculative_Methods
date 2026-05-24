@@ -149,12 +149,12 @@ double Newton(double x)
 ```
 
 ## 等距节点插值
-Newton法的特例， $x_k=x_0+kh,(k \in \N)$ ，可据此改进Newton插值。
+Newton法的特例， $x_k=x_0+kh,(k=0,1,2,\dots)$ ，可据此改进Newton插值。
 
 ### 差分
 定义：
-- 向前差分：$\Delta y_k=y_{k+1}-y_k$ 为 $x_k$ 一阶向前差分，再次基础上可以递推出 $\Delta^m y_k=\Delta^{m-1} y_{k+1}-\Delta^{m-1} y_k$ 为 $x_k$ 的 $m$ 阶向前差分。
-- 向后差分：$\nabla y_k=y_k-y_{k-1}$ 为 $x_k$ 的一阶向后差分，在此基础上可以递推出 $\nabla^m y_k=\nabla^{m-1}y_k-\nabla^{m-1}y_{k-1}$ 为 $x_k$ 的 $m$ 阶向后差分。
+- 向前差分： $\Delta y_k=y_{k+1}-y_k$ 为 $x_k$ 一阶向前差分，再次基础上可以递推出 $\Delta^m y_k=\Delta^{m-1} y_{k+1}-\Delta^{m-1} y_k$ 为 $x_k$ 的 $m$ 阶向前差分。
+- 向后差分： $\nabla y_k=y_k-y_{k-1}$ 为 $x_k$ 的一阶向后差分，在此基础上可以递推出 $\nabla^m y_k=\nabla^{m-1}y_k-\nabla^{m-1}y_{k-1}$ 为 $x_k$ 的 $m$ 阶向后差分。
 
 查分表应该能帮助更好的理解，实际编程我们也是维护一个差分表。
 
