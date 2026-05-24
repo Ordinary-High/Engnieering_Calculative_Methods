@@ -9,9 +9,13 @@
   - [差值余项](#差值余项)
 - [Newton插值](#newton插值)
   - [差商](#差商)
-  - [Newton法插值](#newton法插值)
+  - [Newton插值公式](#newton插值公式)
 - [等距节点插值](#等距节点插值)
   - [差分](#差分)
+  - [等距节点插值公式](#等距节点插值公式)
+    - [前插公式](#前插公式)
+    - [后插公式](#后插公式)
+  - [代码实现](#代码实现)
 
 先弄清楚插值法是干什么
 
@@ -58,7 +62,7 @@ double Lagrange(double x)
 
 直接记结论， $f(x)$ 的差值函数 $P_n(x)$ 在区间 $[a,b]$ 上的误差函数
 
-$$R_n(x)=\dfrac{1}{(n+1)!}f^{(n=1)}(\xi)(x-x_0)(x-x_1)(x-x_2)\dots(x-x_n)$$
+$$R_n(x)=\dfrac{1}{(n+1)!}f^{(n+1)}(\xi)(x-x_0)(x-x_1)(x-x_2)\dots(x-x_n)$$
 
 其中 $\xi\in[a,b]$ 且依赖于 $x$。
 
@@ -126,12 +130,16 @@ vector<vector<double>> cul_cs()
 }
 ```
 
-### Newton法插值
+### Newton插值公式
 如上递归计算即可，并且可以得到 Newton 法的系数即为上表对角线上的系数
 
 $$a_i = f[x_0,x_1,\dots,x_i]\enspace(i=0,1,\dots,n)$$
 
-而[插值方法.cpp](../../Code/插值方法.cpp)中的 `newton()` 函数则实现了Newton插值法，输入 `double x` 为需要拟合的节点。
+Newton插值公式为
+
+$$P_n(x)=a_0 + \sum_{i=1}^n\left[a_i\prod_{j=0}^{i - 1}(x-x_j)\right]$$
+
+[插值方法.cpp](../../Code/插值方法.cpp)中的 `newton()` 函数则实现了Newton插值法，输入 `double x` 为需要拟合的节点。
 
 ```cpp
 double Newton(double x)
@@ -175,3 +183,85 @@ Newton法的特例， $x_k=x_0+kh,(k \in \N)$ ，可据此改进Newton插值。
 | $x_2$ | $y_2$ | $\nabla y_2=y_2-y_1$ | $\nabla^2y_2=\nabla y_2-\nabla y_1$ |||
 | $x_3$ | $y_3$ | $\nabla y_3=y_3-y_2$ | $\nabla^2y_3=\nabla y_3-\nabla y_2$ | $\nabla^3y_3=\nabla^2y_3-\nabla^2y_2$ ||
 | $x_4$ | $y_4$ | $\nabla y_4=y_4-y_3$ | $\nabla^2y_4=\nabla y_4-\nabla y_3$ | $\nabla^3y_4=\nabla^2y_4-\nabla^2y_3$ | $\nabla^4y_4=\nabla^3y_4-\nabla^3y_3$ |
+
+不难发现，向前差分与向后差分的关系为 $\Delta^my_k=\nabla^my_{k+m}$
+
+### 等距节点插值公式
+<h5> 作者认为这部分内容课件上表述不清，难以理解公式，尤其是无法很好地区分前插与后插公式，故作调整 </h5>
+
+差分与差商的关系
+
+$$f[x_0,x_1,\dots,x_m]=\dfrac{1}{m!}\dfrac{1}{h^m}\Delta^my_0=\dfrac{1}{m!}\dfrac{1}{h^m}\nabla^my_m \tag{1}$$
+
+#### 前插公式
+
+由于 $x_k=x_0+kh,(k = 0,1,2,\dots)$ ，设需要拟合的点为 $x=x_0+th$
+
+$$l_i(x)=\prod_{j=0}^{i-1}(x-x_j)=h^i\prod_{j=0}^{i-1}(t-j)$$
+
+故可得等距节点前插值公式：
+
+$$P_n(x)=y_0+\sum_{i=1}^n\left[\dfrac{\Delta^iy_0}{i!}\prod_{j=0}^{i-1}(t-j)\right]$$
+
+当然按照 $(1)$ 式可以直接得到所谓利用了后差分的“后插值公式”
+
+$$P_n(x)=y_0+\sum_{i=1}^n\left[\dfrac{\nabla^iy_i}{i!}\prod_{j=0}^{i-1}(t-j)\right]$$
+
+但这与课件上给出的公式不合，虽然都可以正确计算但是我们需要作出一些改变。
+
+#### 后插公式
+在这里我们定义 $b \geq x_0 > x_{-1} >\dots>x_{-n}\geq a$ ，且 $x_{-k}=x_0-kh\enspace(k=0,1,2,\dots,n;h>0)$
+
+这样，就实现了差分定义与等距下标规则在数学表达上的统一
+
+定义需要拟合的点为 $x=x_0+th$ 得到与课件上相同的后插公式
+
+$$P_n(x)=y_0+\sum_{i=1}^{n}\left[\dfrac{\nabla^iy_0}{i!}\prod_{j=0}^{i-1}(t+j)\right]$$
+
+### 代码实现
+[插值方法.cpp](../../Code/插值方法.cpp)中的 `insert_ahead` 函数实现了向前插值，其中输入 `double t` 为 $x=x_0+th$ 中的 $t$
+```cpp
+double insert_ahead(double t)
+{
+    vector<vector<double>> qc(N + 1, vector<double>(N + 1, 0));
+    for(int i = 0; i <= N; i ++) qc[i][0] = Y[i];
+    for(int j = 1; j <= N; j ++)
+    {
+        for(int i = 0; i <= N - j; i ++) qc[i][j] = qc[i + 1][j - 1] - qc[i][j - 1];
+    }
+
+    double res = Y[0], fac = 1.;
+    for(int i = 1; i <= N; i ++)
+    {
+        fac *= i;
+        double tmp = 1;
+        for(int j = 0; j < i; j ++) tmp *= (t - j);
+        res += qc[0][i] * tmp / fac;
+    }
+    return res;
+}
+```
+[插值方法.cpp](../../Code/插值方法.cpp)中的 `inster_last` 函数实现了向前插值，其中输入 `double t` 为 $x=x_0+th$ 中的 $t$
+```cpp
+double inster_last(double t)
+{
+    vector<vector<double>> hc(N + 1, vector<double>(N + 1, 0));
+    for(int i = 0; i <= N; i ++) hc[i][0] = Y[i];
+    for(int j = 1; j <= N; j ++)
+    {
+        for(int i = j; i <= N; i ++) hc[i][j] = hc[i][j - 1] - hc[i - 1][j - 1];
+    }
+
+    double res = Y[N], fac = 1.;
+    for(int i = 1; i <= N; i ++)
+    {
+        fac *= i;
+        double tmp = 1;
+        for(int j = 0; j < i; j ++) tmp *= t + j;
+        res += hc[N][i] * tmp / fac;
+    }
+    return res;
+}
+```
+
+**注意：** 一般来说四种插值的方法的结果应该是完全一样的，但是由于计算误差的限制，当 `N` 过大时，等距节点插值可能会体现出较大的误差，一般也只用到 $2$ 阶等距节点插值就行了。
