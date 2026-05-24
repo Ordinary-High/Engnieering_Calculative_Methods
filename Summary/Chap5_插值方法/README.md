@@ -84,7 +84,7 @@ $$k(x)=\dfrac{1}{(n+1)!}f^{(n=1)}(\xi)$$
 
 最终得 
 
-$$R_n(x)=\dfrac{1}{(n+1)!}f^{(n=1)}(\xi)(x-x_0)(x-x_1)(x-x_2)\dots(x-x_n)$$
+$$R_n(x)=\dfrac{1}{(n+1)!}f^{(n+1)}(\xi)(x-x_0)(x-x_1)(x-x_2)\dots(x-x_n)$$
 
 ## Newton插值
 
