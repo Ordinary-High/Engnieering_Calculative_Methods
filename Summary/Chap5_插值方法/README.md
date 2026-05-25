@@ -21,6 +21,8 @@
   - [分段二次插值](#分段二次插值)
   - [插值余项](#插值余项)
 - [Hermite插值](#hermite插值)
+  - [插值公式（省流）](#插值公式省流)
+  - [差值余项](#差值余项-1)
 
 先弄清楚插值法是干什么
 
@@ -297,3 +299,58 @@ $$R_n(x)=\dfrac{1}{(n+1)!}f^{(n+1)}(\xi)(x-x_0)(x-x_1)(x-x_2)\dots(x-x_n)$$
 $$|R_1(x)|\leq \dfrac{mh^2}{8}$$
 
 ## Hermite插值
+**核心思想：** 在插值节点不仅要函数值相等、一阶导数也相等。
+
+已知节点 $a=x_0<x_1<\dots<x_n=b$ 且 $f(x)$ 在节点上有
+
+$$f(x_i) = y_i,\enspace f^{'}(x_i)=y^{'}_i,\enspace i=0,1,2,\dots,n$$
+
+构造一个次数不高于 $2n+1$ 次的多项式一定可以满足要求。
+
+令
+
+$$H_{2n+1}(x)=\sum_{i=0}^{n}h_i(x)f(x_i)+\sum_{i=0}^ng_i(x)f^{'}(x_i)$$
+
+其中，基函数 $h_i(x),g_i(x)$ 应满足
+
+$$\begin{cases}
+    h_i(x_j)=\delta_{ij}\\
+    h^{'}(x_j)=0
+\end{cases}
+\begin{cases}
+    g_i(x_j)=0\\
+    g^{'}_i(x_j)=\delta_{ij}
+\end{cases},
+\delta_{ij}=\begin{cases}
+    i & i=j\\
+    0 & i \neq j
+\end{cases} (i,j = 0,1,2,\dots,n)$$
+
+借鉴Lagrange插值法的基函，我们令
+
+$$h_i(x)=(ax+b)\left[l_i(x)\right]^2f(x_i)\\g_i(x)=(cx+d)\left[l_i(x)\right]^2f^{'}(x_i)$$
+
+其中，先取对数再求导可以方便地求出 $l^{'}_i(x)$
+
+$$l_i(x)=\prod_{j=0,j\neq i}^n\dfrac{x-x_j}{x_i-x_j},\enspace l_i^{'}(x)=l_i(x)\sum_{j=0,j\neq i}^n\dfrac{1}{x_i-x_j}$$
+
+求得
+
+$$\begin{cases}
+    a = -2\sum_{j=0,j\neq i}^n\dfrac{1}{x_i-x_j}\\
+    b = 1 + 2x_i\sum_{j=0,j\neq i}^n\dfrac{1}{x_i-x_j}\\
+    c = 1\\
+    d = -x_i
+\end{cases}$$
+
+### 插值公式（省流）
+
+故最终得Hermite插值多项式为
+
+$$H_{2n+1}(x)=\sum_{i=0}^nf(x_i)\left[1-2(x-x_i)\sum_{j=0,j\neq i}^n\dfrac{1}{x_i-x_j}\right][l_i(x)]^2+\sum_{i=0}^nf^{'}(x)(x-x_i)[l_i(x)]^2$$
+
+### 差值余项
+类似于 Lagrange 插值
+
+$$R_{2n+1}(x)=\dfrac{f^{(2n+2)}(\xi)}{(2n+2)!}\left[\prod_{i=0}^n(x-x_i)\right]$$
+
