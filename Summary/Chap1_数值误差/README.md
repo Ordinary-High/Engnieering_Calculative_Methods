@@ -40,7 +40,9 @@ $$e=x^*-x$$
 #### 绝对误差限
 称 $\varepsilon$ 为绝对误差限，简称误差限。
 
-$$\left| \varepsilon \right| = \left| x^\* - x \right| \leq \varepsilon$$
+```math
+\left| \varepsilon \right| = \left| x^* - x \right| \leq \varepsilon
+```
 
 则有 $x^\* = x \pm \varepsilon,\enspace x-\varepsilon\leq x^\* \leq x + \varepsilon$
 
