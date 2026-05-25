@@ -91,15 +91,33 @@ double secant(double x0, double x1, double (*f)(double))
 ---
 
 ## 误差分析
-这里的误差指的是结果的误差，即零点的误差，所以应该用 $|x-x^\*|$ 来估计，不是 $|f(x)|$
+这里的误差指的是结果的误差，即零点的误差，所以应该用 $|x-x^*|$ 来估计，不是 $|f(x)|$
 
 ### 二分法相关误差分析
 #### 收敛性
-$$|x_{k+1}-x^\*|\leq|x_{k + 1} - x_k| = \dfrac{|x_k-x_{k-1}|}{2} = \dfrac{|a-b|}{2^k}$$
-故 $\lim_{k\to+\infty}|x_{k+1}-x^\*|=0$
+```math
+|x_{k+1}-x^*|\leq|x_{k + 1} - x_k| = \dfrac{|x_k-x_{k-1}|}{2} = \dfrac{|a-b|}{2^k}
+```
+
+故 
+
+```math
+\lim_{k\to+\infty}|x_{k+1}-x^*|=0
+```
 
 #### 事前误差分析
-由 $|x_{k+1}-x^\*|\leq \dfrac{|a-b|}{2^k}$ 得 $k \geq \log_2\left(\dfrac{|a-b|}{\varepsilon}\right)$，故 $k =  \left \lceil \dfrac{\ln|a-b|-\ln\varepsilon}{\ln2}\right \rceil$
+由 
+```math
+|x_{k+1}-x^*|\leq \dfrac{|a-b|}{2^k}
+``` 
+得 
+```math
+k \geq \log_2\left(\dfrac{|a-b|}{\varepsilon}\right)
+```
+故
+```math
+k =  \left \lceil \dfrac{\ln|a-b|-\ln\varepsilon}{\ln2}\right \rceil
+```
 
 ### 一般迭代法的收敛性判断
 不是所有的 $x=g(x)$ 形式都可以收敛，关键是找 $g(x)$ 需要满足的条件。
@@ -110,9 +128,13 @@ $$|x_{k+1}-x^\*|\leq|x_{k + 1} - x_k| = \dfrac{|x_k-x_{k-1}|}{2} = \dfrac{|a-b|}
 
 等价于： $g^{'}(x)$ 在 $\Delta$ 内连续，且 $|g^{'}(x)| \leq L < 1$。
 
-满足以上条件的 $g(x)$ 在 $\Delta$ 内迭代均收敛到 $x^\*$。
+满足以上条件的 $g(x)$ 在 $\Delta$ 内迭代均收敛到 $x^*$ 。
 
-误差估计 $|x_k-x^\*|\leq \dfrac{L^k}{1 - L}|x_1 - x_0|$。
+误差估计
+
+```math
+|x_k-x^*|\leq \dfrac{L^k}{1 - L}|x_1 - x_0|
+```
 
 ### 迭代法的迭代速度 ⭐️⭐️⭐️
 老师说这个要考
@@ -121,20 +143,26 @@ $$|x_{k+1}-x^\*|\leq|x_{k + 1} - x_k| = \dfrac{|x_k-x_{k-1}|}{2} = \dfrac{|a-b|}
 
 牛顿法迭代速度分析：
 
-在 $x^\*$ 处泰勒展开：
+在 $x^*$ 处泰勒展开：
 
-$$f(x^\*)=0=f(x_k)+f^{'}(x)(x^\*-x_k)+\dfrac{1}{2}f^{''}(\xi)(x^\*-x_k)^2$$
+```math
+f(x^*)=0=f(x_k)+f^{'}(x)(x^*-x_k)+\dfrac{1}{2}f^{''}(\xi)(x^*-x_k)^2
+```
 
 整理得
 
-$$x^\*=x_k-\dfrac{f(x_k)}{f^{'}(x_k)}-\dfrac{f^{''}(x_k)}{2f(x)}(x^\* - x_k)^2$$
+```math
+x^*=x_k-\dfrac{f(x_k)}{f^{'}(x_k)}-\dfrac{f^{''}(x_k)}{2f(x)}(x^* - x_k)^2
+```
 
 不难发现
 
-$$x^\*-x_{k+1}=-\dfrac{f^{''}(x_k)}{2f(x)}(x^\* - x_k)^2$$
+$$x^*-x_{k+1}=-\dfrac{f^{''}(x_k)}{2f(x)}(x^* - x_k)^2$$
 
 故
 
-$$\dfrac{e_{k+1}}{e_k}=\dfrac{f^{''}(x_k)}{2f(x)}\to\dfrac{f^{''}(x^\*)}{f^{'}(x^\*)}$$
+```math
+\dfrac{e_{k+1}}{e_k}=\dfrac{f^{''}(x_k)}{2f(x)}\to\dfrac{f^{''}(x^*)}{f^{'}(x^*)}
+```
 
 牛顿法为平方收敛

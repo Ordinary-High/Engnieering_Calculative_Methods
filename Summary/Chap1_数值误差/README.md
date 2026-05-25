@@ -44,7 +44,11 @@ $$e=x^*-x$$
 \left| \varepsilon \right| = \left| x^* - x \right| \leq \varepsilon
 ```
 
-则有 $x^\* = x \pm \varepsilon,\enspace x-\varepsilon\leq x^\* \leq x + \varepsilon$
+则有 
+
+```math
+x^* = x \pm \varepsilon,\enspace x-\varepsilon\leq x^* \leq x + \varepsilon
+```
 
 ~~例：~~ 用毫米刻度的直尺测量一长度为 $x^*$ 的物体，测得其长度的近似值为 $x = 
 123mm$ ，由于直尺以毫米为刻度，所以其误差不超过 $0.5mm$，即 $\varepsilon = 0.5mm$ ~~（现在知道为什么基物实验里 $\Delta_仪$ 是最小刻度的一半了吧）~~
@@ -53,12 +57,17 @@ $$e=x^*-x$$
 一句话，相对误差就是 $绝对误差\div真实值$
 #### 相对误差
 
-$$e_r=\dfrac{e}{x^\*}=\dfrac{x^\*-x}{x^\*}$$
+```math
+e_r=\dfrac{e}{x^*}=\dfrac{x^*-x}{x^*}
+```
+
 通常由下式计算：
 
-$$\overline{e_r}=\dfrac{e}{x}=\dfrac{x^\*-x}{x}$$
+```math
+\overline{e_r}=\dfrac{e}{x}=\dfrac{x^*-x}{x}
+```
 
-~~废话，这个式子里不一样有 $x^\*$~~
+~~废话，这个式子里不一样有 $x^*$ ()~~
 #### 相对误差限
 
 $$\left| e_r\right |\leq\varepsilon_r$$
@@ -70,7 +79,7 @@ $$\left| e_r\right |\leq\varepsilon_r$$
 
 **定义：** 如果近似值 $x$ 的**误差限**是其某一位上的半个单位，且该位直到 $x$ 的第 $1$ 位非零数字一共有 $n$ 位，则称近似值 $x$ 有 $n$ 位有效数字。
 
-例：取 $x^\*=1.732050808$
+例：取 $x^*=1.732050808$
 - 取 $x_1 = 1.73$，则 $|e|=0.002050808,|e_1|\leq0.005,\varepsilon_1=0.005$。所以是 $3$ 位有效数字。
 - 取 $x_2=1.7320$，则 $|e_2|=0.000050808,0.00005<|e_2|\leq0.0005,\varepsilon_2 =0.0005$，所以是 $4$ 位有效数字。
 
@@ -84,15 +93,29 @@ $$\left| e_r\right |\leq\varepsilon_r$$
 作者认为该部分证明了解即可，记住结论要紧。
 
 #### ~~基于泰勒公式的证明~~
-考虑函数的误差与变量误差的关系，令精确值 $y^\*=f\left(x_1^\*, x_2^\* \right)$，观测值 $y=f\left(x_1,x_2 \right)$。
+考虑函数的误差与变量误差的关系，令精确值 
+
+```math
+y^*=f\left(x_1^*, x_2^* \right)
+```
+
+观测值 
+
+```math
+y=f\left(x_1,x_2 \right)
+```
 
 由泰勒公式
 
-$$f\left(x_1^\*, x_2^\*\right)\approx f\left(x_1, x_2 \right) + \dfrac{\partial f\left(x_1, x_2 \right)}{\partial x_1}\left(x^\*-x_1 \right)+\dfrac{\partial f\left(x_1, x_2 \right)}{\partial x_2}\left(x^\*-x_2 \right)$$
+```math
+f\left(x_1^*, x_2^*\right)\approx f\left(x_1, x_2 \right) + \dfrac{\partial f\left(x_1, x_2 \right)}{\partial x_1}\left(x^*-x_1 \right)+\dfrac{\partial f\left(x_1, x_2 \right)}{\partial x_2}\left(x^*-x_2 \right)
+```
 
 则
 
-$$e\left(y \right)=y^\*-y\approx\dfrac{\partial f\left(x_1, x_2 \right)}{\partial x_1}e\left(x_1 \right)+\dfrac{\partial f\left(x_1, x_2 \right)}{\partial x_2}e\left(x_2 \right)$$
+```math
+e\left(y \right)=y^*-y\approx\dfrac{\partial f\left(x_1, x_2 \right)}{\partial x_1}e\left(x_1 \right)+\dfrac{\partial f\left(x_1, x_2 \right)}{\partial x_2}e\left(x_2 \right)
+```
 
 $$e_r\left(y \right)\approx\dfrac{\partial f\left(x_1, x_2 \right)}{\partial x_1} \dfrac{x_1}{y} e_r\left(x_1 \right)+\dfrac{\partial f\left(x_1, x_2 \right)}{\partial x_2}\dfrac{x_2}{y}e_r\left(x_2 \right)$$
 
