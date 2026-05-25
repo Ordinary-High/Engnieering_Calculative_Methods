@@ -331,7 +331,14 @@ $$\begin{cases}
 
 借鉴Lagrange插值法的基函，我们令
 
-$$h_i(x)=(ax+b)\left[l_i(x)\right]^2f(x_i)\\g_i(x)=(cx+d)\left[l_i(x)\right]^2f^{'}(x_i)$$
+$$
+\begin{matrix}
+h_i(x)=(ax+b)\left[l_i(x)\right]^2f(x_i) \\
+g_i(x)=(cx+d)\left[l_i(x)\right]^2f^{'}(x_i) \\
+\end{matrix}
+$$
+
+
 
 其中，先取对数再求导可以方便地求出 $l^{'}_i(x)$
 
@@ -431,6 +438,7 @@ $$\begin{cases}
 其中 $\mu_n=\dfrac{h_n}{h_n-h_1},\lambda_n=1-\mu_n,d_n=6\left(\dfrac{y_1-y_0}{h_1}-\dfrac{y_n-y_{n-1}}{h_n}\right)(h_1,h_n)^{-1}$
 
 有
+
 $$
  \begin{bmatrix}
  2 & \lambda_0 &  &  & \mu_1 \\
