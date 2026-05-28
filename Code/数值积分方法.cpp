@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <iostream>
 #include <cmath>
+#include <vector>
 using namespace std;
+#define EPS 1e-6
+#define A 1
+#define B 2
 
 // Cotes系数列表
 const vector<vector<double>> C = {
@@ -29,10 +33,62 @@ double Newton_Cotes(double (*f)(double), double a, double b, double n)
     return res;
 }
 
+double comp_ti(double (*f)(double), double a, double b)
+{
+    double Tk, Tkk, e = 1, h = b - a;
+    Tk = h / 2 * (f(a) + f(b));
+    int k = 2;
+    while (e > EPS)
+    {
+        Tkk = Tk / 2;
+        h /= 2;
+        for(int i = 1; i <= k / 2; i ++) Tkk += h * f(a + (2 * i - 1) * h);
+        e = fabs(Tkk - Tk);
+        cout << "k=" <<  k << " Tk=" << Tk << " e=" << e << endl;
+        Tk = Tkk;
+        k *= 2;
+    }
+    return Tk;
+}
+
+void Romberg(double (*f)(double), double a, double b, int r)
+{
+    vector<vector<double>> tscr;
+    int k = r + 5;
+    tscr.push_back(vector<double> (k, 0));
+    double h = b - a;
+    tscr[0][1] = h / 2 * (f(a) + f(b));
+    for(int i = 2; i < k; i ++)
+    {
+        h /= 2;
+        tscr[0][i] = tscr[0][i - 1] / 2;
+        for(int j = 1; j <= ((1 << (i - 1)) / 2); j ++) tscr[0][i] += h * f(a + h * (2 * j - 1));
+    }
+
+    for(int i = 1; i < 4; i ++)
+    {
+        k -= 1;
+        tscr.push_back(vector<double> (k, 0));
+        for(int j = 1; j < k; j ++) tscr[i][j] = (tscr[i - 1][j + 1] * pow(4, i) - tscr[i - 1][j]) / (pow(4, i) - 1);
+    }
+
+    vector<char> name = {'T', 'S', 'C', 'R'};
+    for(int i = 0; i < 4; i ++)
+    {
+        int tmp = r + 3 - i;
+        for(int j = 1; j <= tmp; j ++) printf("%c%d=%lf ", name[i], 1 << j, tscr[i][j]);
+        cout << endl;
+    }
+    return;
+}
+
 int main()
 {
-    cout << "梯形公式: " << Newton_Cotes(funcToInt, 1, 2, 1) << endl;
-    cout << "Simpson公式: " << Newton_Cotes(funcToInt, 1, 2, 2) << endl;
-    cout << "Newton公式: " << Newton_Cotes(funcToInt, 1, 2, 3) << endl;
-    cout << "Cotes公式: " << Newton_Cotes(funcToInt, 1, 2, 4) << endl;
+    cout << "梯形公式: " << Newton_Cotes(funcToInt, A, B, 1) << endl;
+    cout << "\nSimpson公式: " << Newton_Cotes(funcToInt, A, B, 2) << endl;
+    cout << "\nNewton公式: " << Newton_Cotes(funcToInt, A, B, 3) << endl;
+    cout << "\nCotes公式: " << Newton_Cotes(funcToInt, A, B, 4) << endl;
+    cout << "\n复化梯形公式: \n" << comp_ti(funcToInt, A, B) << endl;
+    cout << "\nRomberg:" << endl;
+    Romberg(funcToInt, A, B, 8);
 }
