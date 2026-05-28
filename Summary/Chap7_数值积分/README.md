@@ -9,6 +9,8 @@
 - [复化求积公式](#复化求积公式)
   - [复化梯形公式](#复化梯形公式)
   - [Romberg求积方法](#romberg求积方法)
+- [Gauss求积公式](#gauss求积公式)
+  - [代权函数的高斯求积公式](#代权函数的高斯求积公式)
 
 数值积分要干什么
 一句话——对函数取点然后按照积分定义以面积代积分。
@@ -194,4 +196,104 @@ void Romberg(double (*f)(double), double a, double b, int r)
     }
     return;
 }
+```
+
+## Gauss求积公式
+之前讨论的插值型积分公式，都是以等距节点为前提，很容易想到如果我们改变积分节点，即将公式 $\int_a^bf(x)=\sum_{i=0}^nA_if(x_i)$ 中 $A_i,x_i$ 均设为可变参数则会提高计算精度。
+
+积分公式
+
+$$\int_a^bf(x)\mathrm{d}x\approx\sum_{k=0}^nA_kf(x_k)$$
+
+我们使之有 $2n+1$ 阶积分精度，可得到下面的方程组：
+
+$$\begin{cases}
+    \sum_{k=0}^nA_k=b-a\\
+    \sum_{k=0}^nA_kx_k=\dfrac{1}{2}\left(b^2-a^2\right)\\
+    \sum_{k=0}^nA_kx_k^2=\dfrac{1}{4}\left(b^3-a^3\right)\\
+    \vdots\\
+    \sum_{k=0}^nA_kx_k^{2n+1}=\dfrac{1}{2n+2}\left(b^{2n+2}-a^{2n+2}\right)\\
+\end{cases}$$
+
+求解以上非线性方程组，求得高斯点 $\left(x_0,x_1,\dots,x_n\right)$ 以及高斯系数 $\left(A_0,A_1,\dots,A_n\right)$
+
+对于一般的情况我们通常计算在区间 $[0,1]$ 上的高斯点和高斯系数，而对于其他积分区间，进行变量代换转换到对应区间上即可。
+
+则问题化为求解非线性方程组
+
+$$F(X)=\begin{bmatrix}
+    \sum_{k=0}^nA_k-1\\
+    \sum_{k=0}^nA_kx_k-\dfrac{1}{2}\\
+    \sum_{k=0}^nA_kx_k^2-\dfrac{1}{3}\\
+    \vdots\\
+    \sum_{k=0}^nA_kx_k^{2n+1}-\dfrac{1}{2n+2}\\
+\end{bmatrix}=0$$
+
+其中
+
+$$X = \left[A_0,A_1,\dots,A_n,x_0,x_1,\dots,x_n\right]^T$$
+
+$$\nabla F=\begin{bmatrix}
+    1 & 1 & \dots & 1& 0 & 0 & \dots & 0 \\
+    x_0 & x_1 & \dots & x_n & A_0 & A_1 & \dots & A_n \\
+    x_0^2 & x_1^2 & \dots & x_n^2 & 2A_0x_0 & 2A_1x_1 & \dots & 2A_nx_n \\
+    \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+    x_0^{2n+1} & x_1^{2n+1} & \dots & x_n^{2n+1} & (2n+1)A_0x_0^{2n} & A_1x_1^{2n} & \dots & A_nx_n^{2n} \\
+\end{bmatrix}$$
+
+然后，用牛顿法解方程组，迭代方程为
+
+$$\Delta x^{(k)}=-\left[\nabla F\left(x^{(k)}\right)\right]^{-1}F\left(x^{(k)}\right)$$
+
+### 代权函数的高斯求积公式
+考察积分
+
+$$\int_a^b\rho(x)f(x)\mathrm{d}x$$
+
+我们称 $\rho(x)$ 为权函数，如果对于 $f(x)$ 次数不超过 $2n+1$ 的多项式都有以下式子准确成立
+
+$$\int_a^b\rho(x)f(x)\mathrm{d}x=\sum_{k=0}^nA_kf(x_k)$$
+
+则称为高斯型积分，不难发现 $\rho(x)\equiv1$ 时纪委普通积分。
+
+代码[Guass求积公式.py](../../Code/Guass求积公式.py)中实现了一般的带权函数高斯求积公式
+
+其中给出了两种计算的 $\int_0^1\rho(x)f(x)$ 准确值的方式
+
+一是当 $\rho(x)$ 是多项式函数时，直接使用解析解，其中参数 `r:float` 表示 $\rho(x)=x^r$。
+```python
+def CulInt(r: float, n: int) -> float:
+    return 1 / (n + r + 1)
+```
+
+二是当 $\rho(x)$ 不是多项式函数时，依靠数值Cotes公式来计算
+
+```python
+def rho(x: float) -> float:
+    return 1.
+
+def culInt(n: int) -> float:
+    res, step = 0, 1e-4
+    i = 0
+    c = [7./90, 32./90, 12./90, 32./90, 7./90]
+    while i < (1 - 0) / step:
+        a, b = i * step, (i + 1) * step
+        s = (b - a) / 4
+        for j in range(5):
+            p = a + j * s
+            res += (rho(p) * (p ** n) * c[j]) * step
+        i += 1
+    return res
+```
+
+再计算时需要你手动调整代码来实现。
+```python
+def F(x: list[float]) -> list[float]:
+    res = [0.] * (2 * N + 2)
+    for i in range(2 * N + 2):
+        for j in range(N + 1):
+            res[i] += x[j] * x[j + N + 1] ** i
+        # res[i] -= CulInt(R, i) # 解析解
+        res[i] -= culInt(i) # 数值解
+    return res
 ```
