@@ -37,7 +37,7 @@ $$A_i=\int_a^b\prod_{j=0,j\neq i}^n\dfrac{x-x_j}{x_i-x_j}\mathrm{d}x=h\left(\pro
 
 定义Cotes系数
 
-$$C_i^{(n)}=\dfrac{(-1)^{n-i}}{ni!(n-i)!}\int_a^b\prod_{j=0,j\neq i}^n(t-j)\mathrm{d}t,\enspace j=0,1,2,\dots,n$$
+$$C_i^{(n)}=\dfrac{(-1)^{n-i}}{ni!(n-i)!}\int_a^b\prod_{j=0,j\neq i}^n(t-j)\mathrm{d}t,\enspace i=0,1,2,\dots,n$$
 
 则求积公式变为
 
