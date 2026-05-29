@@ -167,6 +167,7 @@ $$\begin{cases}
 
 ### 四阶Runge-Kutta方法
 经典四级四阶R-K公式
+
 $$\begin{cases}
     y_{n+1}=y_n+\dfrac{k_1+2k_2+2k_3+k_4}{6}\\
     k_1 = f(x_n, y_n)\\
