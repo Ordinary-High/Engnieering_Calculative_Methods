@@ -2,12 +2,15 @@ import numpy as np
 import math
 import types
 
-N = 1
-EPS = 1e-9
-R = -1/2
+N = 1 # 多项式的次数
+EPS = 1e-9 # 误差限
+R = -1/2 # 权函数的次数（如果为多项式）
 
+
+# 可以设置不是多项式的权函数
 def rho(x: float) -> float:
     return 1.
+
 
 def culInt(n: int) -> float:
     res, step = 0, 1e-4
@@ -22,16 +25,18 @@ def culInt(n: int) -> float:
         i += 1
     return res
 
+
 def CulInt(r: float, n: int) -> float:
     return 1 / (n + r + 1)
+
 
 def F(x: list[float]) -> list[float]:
     res = [0.] * (2 * N + 2)
     for i in range(2 * N + 2):
         for j in range(N + 1):
             res[i] += x[j] * x[j + N + 1] ** i
-        # res[i] -= CulInt(R, i)
-        res[i] -= culInt(i)
+        # res[i] -= CulInt(R, i) # 解析解
+        res[i] -= culInt(i) # 数值解
     return res
 
 

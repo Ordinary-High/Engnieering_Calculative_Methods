@@ -1,12 +1,13 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-#define EPS 1e-4
+#define EPS 1e-4 // 误差限
 #define alpha 0.618
 #define MAXN 50
-#define A 0.
-#define B 1.
+#define A 0. // 区间[a, b]左端点
+#define B 1. // 区间[a, b]右端点
 
+// 需要搜索极值的函数
 double func(double x) {return 8 * x * x * x - 2 * x * x - 7 * x + 3;}
 
 double gsm(double (*f)(double), double a, double b)

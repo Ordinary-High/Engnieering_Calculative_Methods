@@ -3,9 +3,9 @@
 #include <cmath>
 #include <vector>
 using namespace std;
-#define EPS 1e-6
-#define A 1
-#define B 2
+#define EPS 1e-6 // 误差限
+#define A 1 // 区间[a, b]左端点
+#define B 2 // 区间[a, b]右端点
 
 // Cotes系数列表
 const vector<vector<double>> C = {
@@ -20,6 +20,7 @@ const vector<vector<double>> C = {
     {989./28350, 5888./28350, -928./28350, 10496./28350, -4540./28350, 10496./28350, -928./28350, 5888./28350, 989./28350}
 };
 
+// 待积分函数
 double funcToInt(double x)
 {
     return 1./x;

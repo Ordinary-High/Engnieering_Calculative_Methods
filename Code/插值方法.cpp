@@ -2,8 +2,10 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
+// 这修改 n
 #define N 4
 
+// 差值节点的 x 和 y，注意下标从 0 开始的
 const vector<double> X = {0, 0.5, 1.0, 1.5, 2.0};
 const vector<double> Y = {-1.0, 0.5, 2.0, 1.5, 0.0};
 

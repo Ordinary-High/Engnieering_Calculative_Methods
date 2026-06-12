@@ -3,8 +3,9 @@
 #include <cmath>
 using namespace std;
 
-#define eps 1e-6
+#define eps 1e-6 // 修改误差限
 
+// 修改待求解的函数
 double f(double x)
 {
     return exp(x) + 2 * x;

@@ -3,12 +3,13 @@
 #include <cmath>
 #include <vector>
 using namespace std;
-#define h 1e-2
-#define A 0.
-#define B 2.
-#define Y0 1.
-#define EPS 1e-9
+#define h 1e-2 // 步长
+#define A 0. // 区间[a, b]左端点
+#define B 2. // 区间[a, b]右端点
+#define Y0 1. // 初值
+#define EPS 1e-9 // 修改误差限
 
+// 在这里修改你的常微分方程
 double func(double x, double y)
 {
     return x - y + 1;

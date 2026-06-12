@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <cmath>
 using namespace std;
-#define STEP 1e-6
+#define STEP 1e-6 // 步长
 
 double phi(double x)
 {
