@@ -4,6 +4,9 @@
   <a href="https://github.com/liuchunyi-buaa">
     <img src="https://img.shields.io/badge/Author-刘纯一-3776AB?logo=github&logoColor=white" alt="Author" />
   </a>
+  <a href="https://github.com/Ordinary-High">
+    <img src="https://img.shields.io/badge/Author-高逸凡-3776AB?logo=github&logoColor=white" alt="Author" />
+  </a>
 
 </p>
 
@@ -181,5 +184,6 @@ pip install -r requirements.txt   # Python 依赖（可选）
 ---
 
 <p align="center">
+  如果对你有帮助的话，给个⭐️吧<br>
   <sub>如有错误或改进建议，欢迎 <a href="mailto:24374180@buaa.edu.cn">联系我们</a> 或提交 Issue / Pull Request。</sub>
 </p>
