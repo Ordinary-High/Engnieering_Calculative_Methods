@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://github.com/liuchunyi-buaa">
-    <img src="https://img.shields.io/badge/Author-刘纯一-3776AB?logo=github&logoColor=white" alt="Author" />
+    <img src="https://img.shields.io/badge/Author & Maintainer-刘纯一-3776AB?logo=github&logoColor=white" alt="Author" />
   </a>
   <a href="https://github.com/Ordinary-High">
     <img src="https://img.shields.io/badge/Maintainer-高逸凡-2EA44F?logo=github&logoColor=white" alt="Author" />
