@@ -124,9 +124,8 @@ k =  \left \lceil \dfrac{\ln|a-b|-\ln\varepsilon}{\ln2}\right \rceil
 
 这个条件就是 **李普希兹条件:** 
 
-在一个区间 $\Delta$ 内，所有的 $|g(x) - g(y)| \leq L |x-y|,\enspace 0 < L < 1$。
-
-等价于： $g^{'}(x)$ 在 $\Delta$ 内连续，且 $|g^{'}(x)| \leq L < 1$。
+1. 对于 $\forall x \in [a,b]$ 都有 $g(x) \in [a,b]$
+2. 对于 $\forall x \in [a,b]$ 都有 $g^{'}(x) \leq L < 1$
 
 满足以上条件的 $g(x)$ 在 $\Delta$ 内迭代均收敛到 $x^*$ 。
 
