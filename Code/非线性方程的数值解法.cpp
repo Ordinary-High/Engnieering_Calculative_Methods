@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include <cmath>
 using namespace std;
+#define A -1 // 二分法初始区间 [A, B]
+#define B 1 // 二分法初始区间 [A, B]
+#define X0 1 // 牛顿法的初始点
+#define X1 -1 // 弦截法的第二个初始点
 
 #define eps 1e-6 // 修改误差限
 
@@ -55,8 +59,8 @@ double secant(double x0, double x1, double (*f)(double))
 
 int main()
 {
-    printf("%lf\n", bisec(-2, 4, f));
-    printf("%lf\n", newton(1, f, f_));
-    printf("%lf\n", secant(-1, 1, f));
+    printf("%lf\n", bisec(A, B, f));
+    printf("%lf\n", newton(X0, f, f_));
+    printf("%lf\n", secant(X0, X1, f));
     return 0;
 }

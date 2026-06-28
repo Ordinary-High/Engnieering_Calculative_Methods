@@ -55,7 +55,7 @@ $$
 
 将 $F\left(x_{k+1} \right)$ 在 $F\left(x_{k} \right)$ 附近进行泰勒展开
 
-$$F\left(x_{k+1}\right)=F\left(x_k\right)+\nabla F\left(x_k \right)\Delta x+ \nabla^2F\left(\xi\right)\Delta x^2$$
+$$F\left(x_{k+1}\right)=F\left(x_k\right)+\nabla F\left(x_k \right)\Delta x+ O\left(\nabla^2F\left(\xi\right)\Delta x^2\right)$$
 
 令 $F\left(x_{k+1}\right)=0$ 并忽略高阶小项，得
 
@@ -80,7 +80,7 @@ $$\begin{cases}
 
 问题转换为了求 $\varphi(x)$ 得最小值。
 
-下降方向： $p=-\nabla\varphi(x)=-\nabla F(x)F(x)$
+下降方向： $p=-\nabla\varphi(x)=-F(x)^T\nabla F(x)$
 
 下降步长：依然将 $\varphi\left(x_{k+1} \right)$ 在 $\varphi\left(x_{k} \right)$ 附近进行泰勒展开
 

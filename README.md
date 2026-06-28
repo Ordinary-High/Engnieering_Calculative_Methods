@@ -60,6 +60,7 @@
 │   ├── 树的遍历算法.cpp
 │   ├── 图的遍历与最短路径.cpp
 │   ├── Guass求积公式.py
+│   ├── 非线性方程组的数值解法.py
 │   ├── sample_graph.txt
 │   └── README.md
 │
