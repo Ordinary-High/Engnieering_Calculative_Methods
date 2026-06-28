@@ -145,25 +145,25 @@ k =  \left \lceil \dfrac{\ln|a-b|-\ln\varepsilon}{\ln2}\right \rceil
 在 $x^*$ 处泰勒展开：
 
 ```math
-f(x^*)=0=f(x_k)+f^{'}(x)(x^*-x_k)+\dfrac{1}{2}f^{''}(\xi)(x^*-x_k)^2
+f(x^*)=0=f(x_k)+f^{'}(x_k)(x^*-x_k)+\dfrac{1}{2}f^{''}(\xi)(x^*-x_k)^2 + O\left((x^*-x_k)^3\right)
 ```
 
 整理得
 
 ```math
-x^*=x_k-\dfrac{f(x_k)}{f^{'}(x_k)}-\dfrac{f^{''}(x_k)}{2f(x)}(x^* - x_k)^2
+x^*=x_k-\dfrac{f(x_k)}{f^{'}(x_k)}-\dfrac{f^{''}(x_k)}{2f^{'}(x_k)}(x^* - x_k)^2 + \dfrac{O\left((x^*-x_k)^3\right)}{f^{'}(x_k)}
 ```
 
 不难发现
 
 ```math
-x^*-x_{k+1}=-\dfrac{f^{''}(x_k)}{2f(x)}(x^* - x_k)^2
+x^*-x_{k+1}=-\dfrac{f^{''}(x_k)}{2f^{'}(x_k)}(x^* - x_k)^2 + \dfrac{O\left((x^*-x_k)^3\right)}{f^{'}(x_k)}
 ```
 
 故
 
 ```math
-\dfrac{e_{k+1}}{e_k}=\dfrac{f^{''}(x_k)}{2f(x)}\to\dfrac{f^{''}(x^*)}{f^{'}(x^*)}
+\dfrac{e_{k+1}}{e_k^2}\approx \dfrac{f^{''}(x_k)}{2f(x)}\to\dfrac{f^{''}(x^*)}{f^{'}(x^*)}
 ```
 
 牛顿法为平方收敛
