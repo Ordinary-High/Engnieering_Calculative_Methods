@@ -8,6 +8,7 @@ using namespace std;
 // 差值节点的 x 和 y，注意下标从 0 开始的
 const vector<double> X = {0, 0.5, 1.0, 1.5, 2.0};
 const vector<double> Y = {-1.0, 0.5, 2.0, 1.5, 0.0};
+const vector<double> YY = {4., 2., -1., -3., -3.};
 
 const double h = X[1] - X[0];
 
@@ -33,7 +34,7 @@ vector<vector<double>> cul_cs()
     for(int i = 0; i <= N; i ++) c[i][0] = Y[i];
     for(int j = 1; j <= N; j ++)
     {
-        for(int i = j; i <= N; i ++) c[i][j] = (c[i][j - 1] - c[i - 1][j - 1]) / (X[i] - X[i - 1]);
+        for(int i = j; i <= N; i ++) c[i][j] = (c[i][j - 1] - c[i - 1][j - 1]) / (X[i] - X[i - j]);
     }
     return c;
 }
@@ -91,6 +92,29 @@ double inster_last(double t)
     return res;
 }
 
+double Hermite(double x)
+{
+    double res = 0;
+    for(int i = 0; i <= N; i ++)
+    {
+        double li = 1.0;
+        for(int j = 0; j <= N; j ++)
+        {
+            if(j == i) continue;
+            li *= (x - X[j]) / (X[i] - X[j]);
+        }
+        double sum_inv = 0;
+        for(int j = 0; j <= N; j ++)
+        {
+            if(j == i) continue;
+            sum_inv += 1.0 / (X[i] - X[j]);
+        }
+        res += Y[i] * (1.0 - 2.0 * (x - X[i]) * sum_inv) * li * li;
+        res += YY[i] * (x - X[i]) * li * li;
+    }
+    return res;
+}
+
 int main()
 {
     double x = 1.7;
@@ -100,5 +124,6 @@ int main()
     cout << insert_ahead(t) << endl;
     t = (x - X[N]) / h;
     cout << inster_last(t) << endl;
+    cout << Hermite(x) << endl;
     return 0;
 }

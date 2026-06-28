@@ -119,7 +119,7 @@ $$\begin{cases}
 | $x_0$ | $f[x_0] = y_0$ | $y_0$ |||||
 | $x_1$ | $f[x_1]=y_1$ | $y_1$ | $f[x_1, x_0] = \frac{y_1-y_0}{x_1-x_0}$ ||||
 | $x_2$ | $f[x_2]=y_2$ | $y_2$ | $f[x_2, x_1]=\frac{y_2-y_1}{x_2-x_1}$ | $f[x_2,x_0]=\frac{f[x_2,x_1]-f[x_1,x_0]}{x_2-x_0}$ |||
-| $x_3$ | $f[x_3]=y_3$ | $y_3$ | $f[x_3,x_2]=\frac{y_3-y_2}{x_3-x_2}$ | $f[x_3,x_1]=\frac{f[x_3,x_3]-f[x_2,x_1]}{x_3-x_1}$ | $f[x_3,x_0]=\frac{f[x_3,x_1]-f[x_2,x_0]}{x_3-x_0}$ ||
+| $x_3$ | $f[x_3]=y_3$ | $y_3$ | $f[x_3,x_2]=\frac{y_3-y_2}{x_3-x_2}$ | $f[x_3,x_1]=\frac{f[x_3,x_2]-f[x_2,x_1]}{x_3-x_1}$ | $f[x_3,x_0]=\frac{f[x_3,x_1]-f[x_2,x_0]}{x_3-x_0}$ ||
 | $x_4$ | $f[x_4]=y_4$ | $y_4$ | $f[x_3,x_2]=\frac{y_3-y_2}{x_3-x_2}$ | $f[x_4,x_2]=\frac{f[x_4,x_3]-f[x_3,x_2]}{x_4-x_2}$ | $f[x_4,x_1]=\frac{f[x_4,x_2]-f[x_3,x_1]}{x_4-x_1}$ | $f[x_4,x_0]=\frac{f[x_4,x_1]-f[x_3,x_0]}{x_4-x_0}$ |
 
 代码[插值方法.cpp](../../Code/插值方法.cpp)中的 `cal_cs()` 函数实现了计算差商表的功能。其中的插值节点定义为全局变量，返回一个存有差商表的二维容器。
@@ -128,13 +128,10 @@ $$\begin{cases}
 vector<vector<double>> cul_cs()
 {
     vector<vector<double>> c(N + 1, vector<double> (N + 1, NAN));
-    for(int i = 0; i <= N; i ++)
+    for(int i = 0; i <= N; i ++) c[i][0] = Y[i];
+    for(int j = 1; j <= N; j ++)
     {
-        for(int j = i; j <= N; j ++)
-        {
-            if(i == 0) c[i][j] = Y[j];
-            else c[i][j] = (c[i - 1][j] - c[i - 1][j - 1]) / (X[i] - X[i - j]);
-        }
+        for(int i = j; i <= N; i ++) c[i][j] = (c[i][j - 1] - c[i - 1][j - 1]) / (X[i] - X[i - j]);
     }
     return c;
 }

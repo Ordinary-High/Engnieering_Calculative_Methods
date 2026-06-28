@@ -1,10 +1,12 @@
 ## 知识点总结
 本章内容对应的[PPT](../../PPT/第6章%20函数的数值拟合与计算实验-2025版.pdf)
 本章内容的课堂实验[Excel](../../Excel/函数的数值拟合/函数的数值拟合_课堂实验.xlsx)
+对应的[代码](../../Code/函数的数值拟合.py)
 
 快速索引
 - [知识点总结](#知识点总结)
 - [最小二乘法](#最小二乘法)
+- [矛盾方程组](#矛盾方程组)
 
 **问题定义**
 使曲线能够在整体上刻画这组点的变化趋势而不需要通过每个点。
@@ -34,7 +36,7 @@ $$\sum_{j=0}^n\left[a_j\sum_{i=0}^m\varphi_k(x_i)\varphi_j(x_i)\right]=\sum_{i=0
 
 ```math
 \begin{bmatrix}
-\sum_{i=0}^m\varphi_0(x_i)\varphi_0(x_i) & \sum_{i=0}^m\varphi_1(x_i)\varphi_0(x_i) & \dots & \sum_{i=0}^m\varphi_0(x_i)\varphi_n(x_i) \\
+\sum_{i=0}^m\varphi_0(x_i)\varphi_0(x_i) & \sum_{i=0}^m\varphi_0(x_i)\varphi_1(x_i) & \dots & \sum_{i=0}^m\varphi_0(x_i)\varphi_n(x_i) \\
 \sum_{i=0}^m\varphi_1(x_i)\varphi_0(x_i) & \sum_{i=0}^m\varphi_1(x_i)\varphi_1(x_i) & \dots & \sum_{i=0}^m\varphi_1(x_i)\varphi_n(x_i) \\
 \vdots & \vdots & \ddots & \vdots \\
 \sum_{i=0}^m\varphi_n(x_i)\varphi_0(x_i) & \sum_{i=0}^m\varphi_n(x_i)\varphi_1(x_i) & \dots & \sum_{i=0}^m\varphi_n(x_i)\varphi_n(x_i) \\
@@ -89,6 +91,26 @@ y\cdot\varphi_n \\
 ```
 
 向量点乘可以使用 $\text{Excel}$ 中的 `=SUMPRODUCT()` 函数进行计算。
+
+[函数的数值拟合.py](../../Code/函数的数值拟合.py)实现了一般的最小二乘法拟合函数
+```python
+# 在这里修改已知的节点
+X = [0.24, 0.65, 0.95, 1.24, 1.73, 2.01, 2.23, 2.52, 2.77, 2.99]
+Y = [0.23, -0.26, -1.10, -0.45, 0.27, 0.10, -0.29, 0.24, 0.56, 1.00]
+
+# 在这里设置基函数
+Phi = [lambda x: log(x), lambda x: cos(x), lambda x: exp(x)]
+
+m = len(X)
+n = len(Phi)
+
+Phi_vals = np.array([[phi(x) for x in X] for phi in Phi])
+
+G = np.array([[np.dot(Phi_vals[k], Phi_vals[j]) for j in range(n)] for k in range(n)])
+b = np.array([np.dot(Y, Phi_vals[k]) for k in range(n)])
+
+a = np.linalg.solve(G, b)
+```
 
 ## 矛盾方程组
 设矛盾方程组

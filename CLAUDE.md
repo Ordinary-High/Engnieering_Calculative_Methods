@@ -67,7 +67,7 @@ Nested template syntax like `vector<vector<double>>` requires C++11 (right-angle
 | 3 | 线性方程组数值求解 | `线性方程组的数值求解.cpp` (Jacobi, Gauss-Seidel, SOR) |
 | 4 | 非线性方程组数值求解 | `非线性方程组的数值解法.py` (Newton, steepest descent) |
 | 5 | 插值方法 | `插值方法.cpp` (Lagrange, Newton, Hermite, cubic spline) |
-| 6 | 函数数值拟合 | No code (Excel only) |
+| 6 | 函数数值拟合 | `函数的数值拟合.py` (least squares fitting) |
 | 7 | 数值积分 | `数值积分方法.cpp`, `Guass求积公式.py` (Newton-Cotes, Romberg, Gauss) |
 | 8 | 常微分方程数值解法 | `常微分方程的数值解法.cpp` (Euler, RK2/RK4, predictor-corrector) |
 | 9 | 质量与可靠性统计 | `正态分布.cpp` (normal PDF/CDF) |
